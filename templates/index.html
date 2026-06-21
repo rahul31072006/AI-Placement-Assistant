@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Placement Assistant</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <button onclick="newChat()" style="width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;">
+            + New Chat
+        </button>
+        <div id="history-list"></div>
+    </div>
+
+    <!-- Main Chat Area -->
+    <div class="chat-area">
+        <div class="chat-container">
+
+            <div class="header">
+                <h1>🎓 AI Placement Assistant</h1>
+            </div>
+
+            <div id="chat-box" class="chat-box">
+
+                <div class="welcome">
+                    <h2>Welcome 👋</h2>
+                    <p>Ask me about placements, interviews and resumes.</p>
+                </div>
+
+            </div>
+
+            <div class="input-container">
+
+                <input
+                    type="text"
+                    id="user-input"
+                    placeholder="Ask your question..."
+                >
+
+                <button onclick="sendMessage()">
+                    Send
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
