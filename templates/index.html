@@ -1,60 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Placement Assistant</title>
-
     <link rel="stylesheet" href="/static/style.css">
 </head>
-
 <body>
 
 <div class="app">
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <button onclick="newChat()" style="width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;">
-            + New Chat
-        </button>
-        <div id="history-list"></div>
-    </div>
-
-    <!-- Main Chat Area -->
-    <div class="chat-area">
-        <div class="chat-container">
-
-            <div class="header">
-                <h1>🎓 AI Placement Assistant</h1>
-            </div>
-
-            <div id="chat-box" class="chat-box">
-
-                <div class="welcome">
-                    <h2>Welcome 👋</h2>
-                    <p>Ask me about placements, interviews and resumes.</p>
-                </div>
-
-            </div>
-
-            <div class="input-container">
-
-                <input
-                    type="text"
-                    id="user-input"
-                    placeholder="Ask your question..."
-                >
-
-                <button onclick="sendMessage()">
-                    Send
-                </button>
-
-            </div>
-
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <button class="new-chat-btn" onclick="newChat()">+ New Chat</button>
         </div>
-    </div>
+
+        <div class="sidebar-scroll">
+            <section class="panel history-panel">
+                <div class="panel-title">Chat History</div>
+                <div id="history-list" class="history-list"></div>
+            </section>
+
+            <section class="panel placement-panel">
+                <button class="panel-toggle" onclick="toggleSection('placementPrep')">
+                    <span>🎯 Placement Preparation</span>
+                    <span class="toggle-arrow">▶</span>
+                </button>
+                <div id="placementPrep" class="panel-body collapsed">
+                    <button class="subsection-toggle" onclick="toggleSection('aptitudeList')">
+                        <span>▶ Aptitude</span>
+                    </button>
+                    <div id="aptitudeList" class="subsection collapsed">
+                        <button onclick="setTopic('Quantitative Aptitude')">Quantitative Aptitude</button>
+                        <button onclick="setTopic('Logical Reasoning')">Logical Reasoning</button>
+                        <button onclick="setTopic('Verbal Ability')">Verbal Ability</button>
+                        <button onclick="setTopic('Data Interpretation')">Data Interpretation</button>
+                        <button onclick="setTopic('Probability')">Probability</button>
+                        <button onclick="setTopic('Permutation & Combination')">Permutation & Combination</button>
+                        <button onclick="setTopic('Time & Work')">Time & Work</button>
+                        <button onclick="setTopic('Time, Speed & Distance')">Time, Speed & Distance</button>
+                        <button onclick="setTopic('Profit & Loss')">Profit & Loss</button>
+                        <button onclick="setTopic('Number System')">Number System</button>
+                    </div>
+
+                    <button class="subsection-toggle" onclick="toggleSection('dsaList')">
+                        <span>▶ DSA</span>
+                    </button>
+                    <div id="dsaList" class="subsection collapsed">
+                        <button onclick="setTopic('Arrays')">Arrays</button>
+                        <button onclick="setTopic('Strings')">Strings</button>
+                        <button onclick="setTopic('Linked List')">Linked List</button>
+                        <button onclick="setTopic('Stack')">Stack</button>
+                        <button onclick="setTopic('Queue')">Queue</button>
+                        <button onclick="setTopic('Hashing')">Hashing</button>
+                        <button onclick="setTopic('Recursion')">Recursion</button>
+                        <button onclick="setTopic('Binary Search')">Binary Search</button>
+                        <button onclick="setTopic('Sorting')">Sorting</button>
+                        <button onclick="setTopic('Trees')">Trees</button>
+                        <button onclick="setTopic('BST')">BST</button>
+                        <button onclick="setTopic('Heap')">Heap</button>
+                        <button onclick="setTopic('Graph')">Graph</button>
+                        <button onclick="setTopic('Greedy')">Greedy</button>
+                        <button onclick="setTopic('Dynamic Programming')">Dynamic Programming</button>
+                        <button onclick="setTopic('Sliding Window')">Sliding Window</button>
+                        <button onclick="setTopic('Two Pointer')">Two Pointer</button>
+                        <button onclick="setTopic('Backtracking')">Backtracking</button>
+                        <button onclick="setTopic('Tries')">Tries</button>
+                    </div>
+
+                    <button class="subsection-toggle" onclick="toggleSection('interviewList')">
+                        <span>▶ Top Interview Questions</span>
+                    </button>
+                    <div id="interviewList" class="subsection collapsed">
+                        <button onclick="setTopic('HR Interview Questions')">HR Interview Questions</button>
+                        <button onclick="setTopic('Technical Interview Questions')">Technical Interview Questions</button>
+                        <button onclick="setTopic('System Design Questions')">System Design Questions</button>
+                        <button onclick="setTopic('DBMS Questions')">DBMS Questions</button>
+                        <button onclick="setTopic('OS Questions')">OS Questions</button>
+                        <button onclick="setTopic('OOP Questions')">OOP Questions</button>
+                        <button onclick="setTopic('Networking Questions')">Networking Questions</button>
+                        <button onclick="setTopic('SQL Questions')">SQL Questions</button>
+                        <button onclick="setTopic('Python Questions')">Python Questions</button>
+                        <button onclick="setTopic('Java Questions')">Java Questions</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </aside>
+
+    <main class="chat-area">
+        <div class="chat-container">
+            <header class="chat-header">
+                <div>
+                    <h1>AI Placement Assistant</h1>
+                    <p>Ask anything about placements, preparation, interviews and resume guidance.</p>
+                </div>
+            </header>
+
+            <section id="chat-box" class="chat-box">
+                <div class="chat-empty-state">
+                    <div class="welcome-icon">🎓</div>
+                    <h2>Welcome to AI Placement Assistant</h2>
+                    <p>Ask your first question or choose a placement topic from the sidebar.</p>
+                </div>
+            </section>
+
+            <div class="input-footer">
+                <div class="voice-group">
+                    <button id="voice-button" class="voice-btn" onclick="toggleVoiceRecording()" title="Record voice message">🎤</button>
+                    <span id="voice-indicator" class="voice-indicator"></span>
+                </div>
+                <input type="text" id="user-input" placeholder="Ask your question..." autocomplete="off">
+                <button class="send-btn" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+    </main>
 
 </div>
 
 <script src="/static/script.js"></script>
-
 </body>
 </html>
