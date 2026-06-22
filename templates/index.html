@@ -83,6 +83,24 @@
                         <button onclick="setTopic('Python Questions')">Python Questions</button>
                         <button onclick="setTopic('Java Questions')">Java Questions</button>
                     </div>
+
+                    <button class="subsection-toggle" onclick="toggleSection('mncNews')">
+                        <span>▶ MNC Hiring News</span>
+                    </button>
+                    <div id="mncNews" class="news-section subsection collapsed">
+                        <div id="mncNewsBody" class="news-list"></div>
+                        <div id="mncNewsLoading" class="news-loading">Loading MNC news...</div>
+                        <div id="mncNewsEmpty" class="news-empty">No data found.</div>
+                    </div>
+
+                    <button class="subsection-toggle" onclick="toggleSection('internshipNews')">
+                        <span>▶ Internship Updates</span>
+                    </button>
+                    <div id="internshipNews" class="news-section subsection collapsed">
+                        <div id="internshipNewsBody" class="news-list"></div>
+                        <div id="internshipNewsLoading" class="news-loading">Loading internship updates...</div>
+                        <div id="internshipNewsEmpty" class="news-empty">No data found.</div>
+                    </div>
                 </div>
             </section>
         </div>

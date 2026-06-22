@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+requests
+feedparser
+groq
+python-dotenv

@@ -294,6 +294,84 @@ function toggleSection(sectionId) {
             arrow.style.transform = !isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
         }
     }
+
+    if (!isExpanded) {
+        if (sectionId === 'mncNews') {
+            loadMncNews();
+        } else if (sectionId === 'internshipNews') {
+            loadInternshipNews();
+        }
+    }
+}
+
+function renderNewsCards(items, containerId, loadingId, emptyId) {
+    const container = document.getElementById(containerId);
+    const loading = document.getElementById(loadingId);
+    const empty = document.getElementById(emptyId);
+
+    loading.style.display = 'none';
+
+    if (!items || items.length === 0) {
+        container.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+    }
+
+    empty.style.display = 'none';
+    container.innerHTML = items.map(item => `
+        <div class="news-card">
+            <div class="news-row">
+                <span class="news-company">${item.company || 'Unknown Company'}</span>
+                <span class="news-date">${item.posted_date || 'Unknown date'}</span>
+            </div>
+            <div class="news-title">${item.job_title || 'No title'}</div>
+            <div class="news-details">
+                <span>${item.location || 'Location unknown'}</span>
+                <span>${item.source_query || ''}</span>
+            </div>
+            <a class="news-link" href="${item.apply_link}" target="_blank" rel="noopener noreferrer">Apply Link</a>
+        </div>
+    `).join('');
+}
+
+async function loadMncNews() {
+    const loading = document.getElementById('mncNewsLoading');
+    const empty = document.getElementById('mncNewsEmpty');
+    const body = document.getElementById('mncNewsBody');
+    loading.style.display = 'block';
+    empty.style.display = 'none';
+    body.innerHTML = '';
+
+    try {
+        const response = await fetch('/news/mnc');
+        if (!response.ok) throw new Error('Failed to load MNC news');
+        const data = await response.json();
+        renderNewsCards(data.items, 'mncNewsBody', 'mncNewsLoading', 'mncNewsEmpty');
+    } catch (error) {
+        console.error('Error loading MNC news:', error);
+        loading.style.display = 'none';
+        empty.style.display = 'block';
+    }
+}
+
+async function loadInternshipNews() {
+    const loading = document.getElementById('internshipNewsLoading');
+    const empty = document.getElementById('internshipNewsEmpty');
+    const body = document.getElementById('internshipNewsBody');
+    loading.style.display = 'block';
+    empty.style.display = 'none';
+    body.innerHTML = '';
+
+    try {
+        const response = await fetch('/news/internship');
+        if (!response.ok) throw new Error('Failed to load internship updates');
+        const data = await response.json();
+        renderNewsCards(data.items, 'internshipNewsBody', 'internshipNewsLoading', 'internshipNewsEmpty');
+    } catch (error) {
+        console.error('Error loading internship news:', error);
+        loading.style.display = 'none';
+        empty.style.display = 'block';
+    }
 }
 
 function setTopic(topic) {

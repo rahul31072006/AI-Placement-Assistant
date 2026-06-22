@@ -7,6 +7,7 @@ from database import create_tables
 
 from routes.chat import router as chat_router
 from routes.history import router as history_router
+from routes.news import router as news_router
 
 create_tables()
 
@@ -24,6 +25,7 @@ app.add_middleware(
 
 app.include_router(chat_router)
 app.include_router(history_router)
+app.include_router(news_router)
 
 app.mount(
     "/static",

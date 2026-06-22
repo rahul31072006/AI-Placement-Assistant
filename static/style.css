@@ -147,6 +147,80 @@ button, input {
     transition: background 0.2s, border-color 0.2s;
 }
 
+.news-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.news-card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.news-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.news-company {
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.news-date {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.news-title {
+    color: #e2e8f0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.news-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.news-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #e2e8f0;
+    background: #2563eb;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.news-link:hover {
+    background: #1d4ed8;
+}
+
+.news-loading,
+.news-empty {
+    display: none;
+    color: #94a3b8;
+    padding: 12px 10px;
+    font-size: 13px;
+}
+
 .subsection button:hover {
     background: rgba(148, 163, 184, 0.12);
     border-color: #334155;
